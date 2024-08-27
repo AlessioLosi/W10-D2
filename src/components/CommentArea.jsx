@@ -3,6 +3,7 @@ import CommentList from './CommentList'
 import AddComment from './AddComment'
 import Loading from './Loading'
 import Error from './Error'
+import { useEffect, useState } from 'react'
 
 const CommentArea=({asin }) => {
   const [comments, setComments] = useState([]);

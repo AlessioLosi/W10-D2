@@ -1,18 +1,19 @@
 import { Component } from 'react'
 import { Button, Form } from 'react-bootstrap'
+import { useEffect, useState } from 'react'
 
-const AddComment=({asin})=> {
-  const [comment, setComment] = useState({
+const AddComment=({asin, prevProps, props})=> {
+  const [comments, setComments] = useState({
     comment: '',
     rate: 1,
     elementId: asin,
   });
 
 
-  componentDidUpdate(prevProps)
+  useEffect(prevProps)
    {
     if (prevProps.asin !== asin) {
-      setComment({
+      setComments({
           ...comment,
           elementId: asin,
         })
@@ -20,7 +21,7 @@ const AddComment=({asin})=> {
     }
   }
 
-  sendComment = async (e) => {
+  const sendComments = async (e) => {
     e.preventDefault()
     try {
       let response = await fetch(
@@ -36,7 +37,7 @@ const AddComment=({asin})=> {
       )
       if (response.ok) {
         alert('Recensione inviata!')
-        setComment({  comment: '',
+        setComments({  comment: '',
           rate: 1,
           elementId:asin,
         })
@@ -46,19 +47,17 @@ const AddComment=({asin})=> {
     } catch (error) {
       alert(error)
     }
-  }
-
-    return (
+  return (
       <div className="my-3">
-        <Form onSubmit={sendComment}>
+        <Form onSubmit={sendComments}>
           <Form.Group className="mb-2">
             <Form.Label>Recensione</Form.Label>
             <Form.Control
               type="text"
               placeholder="Inserisci qui il testo"
-              value={comment.comment}
+              value={comments.comment}
               onChange={(e) =>
-                setComment({
+                setComments({
                   ...comment,
                   comment: e.target.value
                 })
@@ -69,9 +68,9 @@ const AddComment=({asin})=> {
             <Form.Label>Valutazione</Form.Label>
             <Form.Control
               as="select"
-              value={comment.rate}
+              value={comments.rate}
               onChange={(e) =>
-                setComment({
+                setComments({
                   ...comment,
                   rate: e.target.value
                 })
@@ -89,6 +88,5 @@ const AddComment=({asin})=> {
           </Button>
         </Form>
       </div>
-    )
-
+  )}
 export default AddComment

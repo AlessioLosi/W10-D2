@@ -1,6 +1,7 @@
 import { Component } from 'react'
 import { Card } from 'react-bootstrap'
 // import CommentArea from './CommentArea'
+import { useEffect, useState } from 'react'
 
 const SingleBook =(props)=> {
   // state = {
