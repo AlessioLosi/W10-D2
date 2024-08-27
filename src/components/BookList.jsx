@@ -8,11 +8,9 @@ const BookList =({books}) => {
   const [searchQuery, setSearchQuery] = useState({});
   const [selectedBook, setSelectedBook] = useState({});
   
-
-  changeSelectedBook = (asin) => {
-    setSelectedBook(asin)
-  }
-
+  const changeSelectedBook = (asin) => {
+    setSelectedBook(asin);
+  };
     return (
       <>
         <Row>
